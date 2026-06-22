@@ -1954,6 +1954,15 @@ function ResumePage() {
                 </ul>
               </article>
             ))}
+            <article className="resume-v44-file-card">
+              <code>original file</code>
+              <h3>Need the PDF?</h3>
+              <p>Open the real file in the browser, or download it. No tiny embedded preview.</p>
+              <div>
+                <a href={links.resume} download>Download PDF <DownloadSimple size={16} /></a>
+                <a href={links.resume} target="_blank" rel="noreferrer">Open PDF <ArrowUpRight size={16} /></a>
+              </div>
+            </article>
           </section>
           <a
             id="resume-page-view"

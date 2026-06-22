@@ -14413,3 +14413,58 @@ body.menu-open {
     margin: 0 !important;
   }
 }
+
+/* Variant 102: phones get readable resume text, not a broken PDF pan box. */
+@media (max-width: 700px) {
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0 0 auto;
+    height: 112px;
+    z-index: 19;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(3, 4, 6, .97), rgba(3, 4, 6, .82) 54%, rgba(3, 4, 6, 0));
+  }
+
+  body.menu-open::before {
+    display: none;
+  }
+
+  .resume-v42-viewer {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .resume-v42-toolbar,
+  .resume-v32-page.resume-v42-page {
+    display: none !important;
+  }
+
+  .resume-v44-file-card div {
+    display: grid;
+    gap: 9px;
+    margin-top: 14px;
+  }
+
+  .resume-v44-file-card a {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 247, 232, .14);
+    background: rgba(255, 247, 232, .07);
+    color: rgba(255, 247, 232, .9);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .resume-v44-file-card a:first-child {
+    background: linear-gradient(135deg, #7E49B3, #a77ad8);
+    color: #141414;
+    border-color: rgba(207, 207, 207, .22);
+  }
+}
