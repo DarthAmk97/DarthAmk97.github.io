@@ -70,6 +70,10 @@ const stripBasePath = (pathname) => {
   if (pathname.startsWith(`${cleanBase}/`)) return pathname.slice(cleanBase.length) || '/';
   return pathname || '/';
 };
+const normalizeRoutePath = (pathname) => {
+  const stripped = stripBasePath(pathname) || '/';
+  return stripped.length > 1 ? stripped.replace(/\/+$/, '') : stripped;
+};
 const browserPath = (path) => {
   if (!cleanBase || cleanBase === '/') return path;
   return path === '/' ? `${cleanBase}/` : `${cleanBase}${path}`;
@@ -784,16 +788,16 @@ const caseLensLabels = {
 };
 
 function useRoute() {
-  const [path, setPath] = useState(() => stripBasePath(window.location.pathname) || '/');
+  const [path, setPath] = useState(() => normalizeRoutePath(window.location.pathname));
   useEffect(() => {
     const redirect = sessionStorage.getItem('redirect');
     if (redirect) {
       sessionStorage.removeItem('redirect');
-      const target = redirect.startsWith('/') ? redirect : `/${redirect}`;
+      const target = normalizeRoutePath(redirect.startsWith('/') ? redirect : `/${redirect}`);
       window.history.replaceState({}, '', browserPath(target));
       setPath(target);
     }
-    const onPop = () => setPath(stripBasePath(window.location.pathname) || '/');
+    const onPop = () => setPath(normalizeRoutePath(window.location.pathname));
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
