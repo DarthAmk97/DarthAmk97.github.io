@@ -1848,6 +1848,43 @@ function ResumePage() {
     { label: 'page 1', src: publicUrl('assets/resume-preview-page-1.png') },
     { label: 'page 2', src: publicUrl('assets/resume-preview-page-2.png') }
   ];
+  const mobileResumeSections = [
+    {
+      label: 'work',
+      title: 'Machine Learning Engineer — DPD Group',
+      items: [
+        'Fine-tuned Gemma for internal SQL/query generation and cut base-model token use by 40%.',
+        'Built the churn meta-ensemble that caught 67% of total churn cases; $650K saved so far.',
+        'Built volume forecasting that beat a 12-year human benchmark by +8% across 80+ hubs.'
+      ]
+    },
+    {
+      label: 'before',
+      title: 'Daraz, Dastgyr, Udacity',
+      items: [
+        'Daraz: Wide & Deep ranking, LTR, 50+ A/B tests, and about +35% conversion lift.',
+        'Dastgyr: SWING recommender for Top For You, +1.44% basket-size uplift and +22% AOV.',
+        'Udacity: led AI/Python learning sessions and helped learners get code running.'
+      ]
+    },
+    {
+      label: 'projects',
+      title: 'Things I built outside work',
+      items: [
+        'Sort Moments: local-first event photo sorting for 4,000+ image sets.',
+        'WeaveSkip: turns one source into platform-native drafts with review before publish.',
+        'Hugging Face releases and Navigating Noise: small-model experiments and writing.'
+      ]
+    },
+    {
+      label: 'education',
+      title: 'Education',
+      items: [
+        'MSc Data Science, University of Essex — Distinction.',
+        'BS Computer Science, FAST-NU.'
+      ]
+    }
+  ];
   const activePage = pages[activePageIndex] || pages[0];
 
   return (
@@ -1898,6 +1935,22 @@ function ResumePage() {
               ))}
             </div>
           </div>
+          <section className="resume-v44-mobile-read" aria-label="Mobile-readable resume">
+            <div className="resume-v44-mobile-head">
+              <code>mobile version</code>
+              <h2>Readable version.</h2>
+              <p>Same resume content, rebuilt as text for phone screens.</p>
+            </div>
+            {mobileResumeSections.map((section) => (
+              <article key={section.label}>
+                <code>{section.label}</code>
+                <h3>{section.title}</h3>
+                <ul>
+                  {section.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </article>
+            ))}
+          </section>
           <a
             id="resume-page-view"
             className="resume-v32-page resume-v42-page"

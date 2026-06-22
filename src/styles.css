@@ -14244,3 +14244,172 @@ body.menu-open {
     font-size: clamp(1.35rem, 7.4vw, 2.2rem) !important;
   }
 }
+
+/* Variant 101: resume cannot be a tiny PDF postcard on phones. */
+.resume-v44-mobile-read {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .resume-v32 {
+    min-height: 100dvh !important;
+    height: auto !important;
+    padding: 96px 16px 54px !important;
+    overflow: visible !important;
+  }
+
+  .resume-v32-shell {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .resume-v32-side,
+  .resume-v42-viewer {
+    width: 100% !important;
+    border-radius: 24px !important;
+  }
+
+  .resume-v32-side {
+    padding: 18px !important;
+    gap: 13px !important;
+  }
+
+  .resume-v32-side h1 {
+    max-width: none !important;
+    font-size: clamp(3.1rem, 15vw, 4.6rem) !important;
+    line-height: .86 !important;
+  }
+
+  .resume-v32-side > p {
+    font-size: 1rem !important;
+    line-height: 1.45 !important;
+    max-width: 28ch !important;
+  }
+
+  .resume-v32-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  .resume-v32-actions a {
+    width: 100% !important;
+    min-height: 48px !important;
+    justify-content: center !important;
+    font-size: .98rem !important;
+    border-radius: 16px !important;
+  }
+
+  .resume-v32-facts,
+  .resume-v32-links {
+    display: none !important;
+  }
+
+  .resume-v42-viewer {
+    padding: 12px !important;
+    gap: 12px !important;
+    overflow: visible !important;
+  }
+
+  .resume-v42-toolbar {
+    order: 2 !important;
+    align-items: stretch !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .resume-v42-page-tabs {
+    width: 100% !important;
+  }
+
+  .resume-v42-page-tabs button {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 38px !important;
+  }
+
+  .resume-v44-mobile-read {
+    order: 1 !important;
+    display: grid !important;
+    gap: 12px !important;
+  }
+
+  .resume-v44-mobile-head,
+  .resume-v44-mobile-read article {
+    border: 1px solid rgba(255, 247, 232, .12);
+    border-radius: 20px;
+    background: rgba(255, 247, 232, .045);
+    padding: 16px;
+  }
+
+  .resume-v44-mobile-read code {
+    display: block;
+    margin: 0 0 8px;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .78rem;
+    line-height: 1.3;
+  }
+
+  .resume-v44-mobile-read h2,
+  .resume-v44-mobile-read h3,
+  .resume-v44-mobile-read p {
+    margin: 0;
+  }
+
+  .resume-v44-mobile-read h2 {
+    max-width: 16ch;
+    color: var(--text);
+    font-family: 'Space Grotesk Variable', 'Aptos', system-ui, sans-serif;
+    font-size: clamp(1.9rem, 8vw, 2.45rem);
+    line-height: .96;
+    letter-spacing: -.055em;
+  }
+
+  .resume-v44-mobile-read h3 {
+    color: var(--text);
+    font-size: 1.13rem;
+    line-height: 1.12;
+    letter-spacing: -.02em;
+  }
+
+  .resume-v44-mobile-read p {
+    margin-top: 10px;
+    color: rgba(255, 247, 232, .72);
+    font-size: .98rem;
+    line-height: 1.45;
+  }
+
+  .resume-v44-mobile-read ul {
+    margin: 12px 0 0;
+    padding-left: 1.05rem;
+    display: grid;
+    gap: 9px;
+  }
+
+  .resume-v44-mobile-read li {
+    color: rgba(255, 247, 232, .8);
+    font-size: .98rem;
+    line-height: 1.44;
+  }
+
+  .resume-v32-page.resume-v42-page {
+    order: 3 !important;
+    max-height: 74dvh !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 20px !important;
+  }
+
+  .resume-v32-page.resume-v42-page img {
+    width: 760px !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+}
