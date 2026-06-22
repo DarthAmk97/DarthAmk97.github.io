@@ -14416,20 +14416,6 @@ body.menu-open {
 
 /* Variant 102: phones get readable resume text, not a broken PDF pan box. */
 @media (max-width: 700px) {
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0 0 auto;
-    height: 112px;
-    z-index: 19;
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(3, 4, 6, .97), rgba(3, 4, 6, .82) 54%, rgba(3, 4, 6, 0));
-  }
-
-  body.menu-open::before {
-    display: none;
-  }
-
   .resume-v42-viewer {
     border: 0 !important;
     background: transparent !important;
