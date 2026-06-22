@@ -816,6 +816,11 @@ function App() {
   }, [path]);
   useEffect(() => {
     const onKey = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        setPaletteOpen(false);
+        return;
+      }
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
         setPaletteOpen(true);
@@ -824,6 +829,10 @@ function App() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', menuOpen);
+    return () => document.body.classList.remove('menu-open');
+  }, [menuOpen]);
   const runPaletteAction = (action) => {
     setPaletteOpen(false);
     if (action.path) {
@@ -912,17 +921,29 @@ function Nav({ path, navigate, menuOpen, setMenuOpen, onPaletteOpen }) {
         <TerminalWindow size={16} />
         <span>jump</span>
       </button>
-      <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
+      <button className="menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
         <span className={menuOpen ? 'line line-a open' : 'line line-a'} />
         <span className={menuOpen ? 'line line-b open' : 'line line-b'} />
       </button>
-      <div className={menuOpen ? 'mobile-menu open' : 'mobile-menu'}>
+      <div
+        className={menuOpen ? 'mobile-menu open' : 'mobile-menu'}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        onClick={(event) => {
+          if (event.target === event.currentTarget) setMenuOpen(false);
+        }}
+      >
+        <button className="mobile-menu-close" type="button" onClick={() => setMenuOpen(false)} aria-label="Close navigation">
+          <X size={18} weight="bold" />
+          <span>close</span>
+        </button>
         {navItems.map((item, index) => (
-          <button key={item.path} style={{ '--delay': `${index * 80}ms` }} onClick={() => closeNavigate(item.path)}>
+          <button key={item.path} type="button" style={{ '--delay': `${index * 80}ms` }} onClick={() => closeNavigate(item.path)}>
             {item.label}
           </button>
         ))}
-        <button style={{ '--delay': `${navItems.length * 80}ms` }} onClick={() => { setMenuOpen(false); onPaletteOpen(); }}>
+        <button type="button" style={{ '--delay': `${navItems.length * 80}ms` }} onClick={() => { setMenuOpen(false); onPaletteOpen(); }}>
           Command palette
         </button>
       </div>
