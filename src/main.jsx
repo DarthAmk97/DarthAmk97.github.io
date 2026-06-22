@@ -934,10 +934,6 @@ function Nav({ path, navigate, menuOpen, setMenuOpen, onPaletteOpen }) {
           if (event.target === event.currentTarget) setMenuOpen(false);
         }}
       >
-        <button className="mobile-menu-close" type="button" onClick={() => setMenuOpen(false)} aria-label="Close navigation">
-          <X size={18} weight="bold" />
-          <span>close</span>
-        </button>
         {navItems.map((item, index) => (
           <button key={item.path} type="button" style={{ '--delay': `${index * 80}ms` }} onClick={() => closeNavigate(item.path)}>
             {item.label}
