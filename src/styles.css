@@ -14756,3 +14756,14 @@ body.menu-open {
     box-shadow: 0 0 0 3px rgba(167, 122, 216, .14);
   }
 }
+
+
+/* Variant 108: force the compiled mobile nav to have no visual glass blur. */
+@media (max-width: 980px) {
+  .nav-wrap > .brand-pill,
+  .nav-wrap > .menu-button,
+  .mobile-menu {
+    backdrop-filter: blur(0px) !important;
+    -webkit-backdrop-filter: blur(0px) !important;
+  }
+}
