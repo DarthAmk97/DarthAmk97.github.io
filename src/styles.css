@@ -14763,7 +14763,8 @@ body.menu-open {
   .nav-wrap > .brand-pill,
   .nav-wrap > .menu-button,
   .mobile-menu {
-    backdrop-filter: blur(0px) !important;
-    -webkit-backdrop-filter: blur(0px) !important;
+    --mobile-nav-backdrop: none;
+    backdrop-filter: var(--mobile-nav-backdrop) !important;
+    -webkit-backdrop-filter: var(--mobile-nav-backdrop) !important;
   }
 }

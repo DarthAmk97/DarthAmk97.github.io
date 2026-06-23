@@ -938,13 +938,22 @@ function NoiseLayer() {
 }
 
 function Nav({ path, navigate, menuOpen, navHidden, setMenuOpen, onPaletteOpen }) {
+  const [mobileNavSurface, setMobileNavSurface] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 980px)');
+    const syncSurface = () => setMobileNavSurface(query.matches);
+    syncSurface();
+    query.addEventListener('change', syncSurface);
+    return () => query.removeEventListener('change', syncSurface);
+  }, []);
+  const solidMobileNavStyle = mobileNavSurface ? { backdropFilter: 'none', WebkitBackdropFilter: 'none' } : undefined;
   const closeNavigate = (next) => {
     setMenuOpen(false);
     navigate(next);
   };
   return (
     <header className={navHidden && !menuOpen ? 'nav-wrap mobile-hidden' : 'nav-wrap'} data-reveal>
-      <button className="brand-pill" onClick={() => closeNavigate('/')} aria-label="Go home">
+      <button className="brand-pill" style={solidMobileNavStyle} onClick={() => closeNavigate('/')} aria-label="Go home">
         <span className="brand-mark"><img src={brandIcons.avatarHead} alt="" /></span>
         <span>Abdullah Khawaja</span>
       </button>
@@ -959,12 +968,13 @@ function Nav({ path, navigate, menuOpen, navHidden, setMenuOpen, onPaletteOpen }
         <TerminalWindow size={16} />
         <span>jump</span>
       </button>
-      <button className="menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
+      <button className="menu-button" style={solidMobileNavStyle} type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
         <span className={menuOpen ? 'line line-a open' : 'line line-a'} />
         <span className={menuOpen ? 'line line-b open' : 'line line-b'} />
       </button>
       <div
         className={menuOpen ? 'mobile-menu open' : 'mobile-menu'}
+        style={solidMobileNavStyle}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
