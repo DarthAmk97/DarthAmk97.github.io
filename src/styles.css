@@ -14587,3 +14587,85 @@ body.menu-open {
     font-size: .62rem !important;
   }
 }
+
+/* Variant 106: mobile resume should read like notes, not a zoomed poster. */
+@media (max-width: 700px) {
+  .resume-v32 {
+    padding: 120px 14px 42px !important;
+  }
+
+  .resume-v32-shell {
+    gap: 0 !important;
+  }
+
+  .resume-v32-side {
+    display: none !important;
+  }
+
+  .resume-v42-viewer {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .resume-v44-mobile-read {
+    gap: 10px !important;
+  }
+
+  .resume-v44-mobile-head,
+  .resume-v44-mobile-read article {
+    padding: 14px !important;
+    border-radius: 18px !important;
+    background: rgba(255, 247, 232, .04) !important;
+  }
+
+  .resume-v44-mobile-read h2 {
+    max-width: 12ch !important;
+    font-size: clamp(2rem, 10.5vw, 2.75rem) !important;
+    line-height: .92 !important;
+    letter-spacing: -.055em !important;
+  }
+
+  .resume-v44-mobile-read h3 {
+    font-size: 1rem !important;
+    line-height: 1.14 !important;
+    letter-spacing: -.018em !important;
+  }
+
+  .resume-v44-mobile-read p {
+    margin-top: 8px !important;
+    font-size: .9rem !important;
+    line-height: 1.36 !important;
+  }
+
+  .resume-v44-mobile-read ul {
+    margin-top: 10px !important;
+    padding-left: 0 !important;
+    gap: 8px !important;
+    list-style: none !important;
+  }
+
+  .resume-v44-mobile-read li {
+    position: relative;
+    padding-left: 16px !important;
+    font-size: .9rem !important;
+    line-height: 1.35 !important;
+    color: rgba(255, 247, 232, .78) !important;
+  }
+
+  .resume-v44-mobile-read li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 247, 232, .72);
+  }
+
+  .resume-v44-file-card div {
+    gap: 8px !important;
+  }
+}

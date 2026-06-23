@@ -1891,7 +1891,7 @@ function ResumePage() {
       label: 'work',
       title: 'Machine Learning Engineer — DPD Group',
       items: [
-        'Fine-tuned Gemma for internal SQL/query generation and cut base-model token use by 40%.',
+        'Fine-tuned Gemma for the DPD chatbot using internal conversations, tool calls, and databooks; projected lower serving spend.',
         'Built the churn meta-ensemble that caught 67% of total churn cases; $650K saved so far.',
         'Built volume forecasting that beat a 12-year human benchmark by +8% across 80+ hubs.'
       ]
