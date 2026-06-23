@@ -907,7 +907,6 @@ function App() {
       <NoiseLayer />
       <Nav path={path} navigate={navigate} menuOpen={menuOpen} navHidden={navHidden} setMenuOpen={setMenuOpen} onPaletteOpen={() => setPaletteOpen(true)} />
       {page}
-      {!['/portfolio', '/about', '/papers', '/blogs', '/resume', '/contribution-snake'].includes(path) && <Footer navigate={navigate} />}
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} onRun={runPaletteAction} />
     </main>
   );
@@ -1254,7 +1253,7 @@ function Home({ navigate }) {
             That interest stayed. I studied computer science at FAST, kept building pet projects, worked on recommender systems at Daraz/Alibaba Group, moved to the UK for postgrad, and now work on machine learning problems at DPD UK. I still like the same part I liked then: figuring out what works, putting the pieces together, and watching something useful come alive.
           </p>
           <div className="home-v24-actions">
-            <button onClick={() => navigate('/portfolio')}>Open the work <ArrowUpRight size={17} /></button>
+            <button onClick={() => navigate('/portfolio')}>Check out my work <ArrowUpRight size={17} /></button>
             <a href={links.resume} download>Download resume <DownloadSimple size={17} /></a>
             <button className="quiet" onClick={() => navigate('/about')}>Read the story <ArrowUpRight size={17} /></button>
           </div>
