@@ -14821,3 +14821,57 @@ body.menu-open {
     letter-spacing: -.02em !important;
   }
 }
+
+
+/* Variant 110: tablet/landscape home identity needs a portrait, not a tiny badge. */
+@media (min-width: 681px) and (max-width: 1120px) {
+  .home-v24-id {
+    grid-template-columns: clamp(168px, 19vw, 220px) minmax(0, 1fr) !important;
+    column-gap: clamp(28px, 5vw, 54px) !important;
+    row-gap: 22px !important;
+    align-items: center !important;
+  }
+
+  .home-v24-avatar-wrap {
+    width: clamp(168px, 19vw, 220px) !important;
+    border-radius: 34px !important;
+    align-self: center !important;
+  }
+
+  .home-v24-name {
+    align-self: center !important;
+  }
+
+  .home-v24-name h2 {
+    max-width: 8.4ch !important;
+  }
+
+  .home-v24-name span {
+    display: block !important;
+    max-width: 24ch !important;
+  }
+
+  .home-v24-socials {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+
+/* Variant 111: mobile home portrait should match the weight of the name block. */
+@media (max-width: 680px) {
+  .home-v24-id {
+    grid-template-columns: clamp(112px, 31vw, 128px) minmax(0, 1fr) !important;
+    gap: 14px 18px !important;
+    align-items: center !important;
+  }
+
+  .home-v24-avatar-wrap {
+    width: clamp(112px, 31vw, 128px) !important;
+    border-radius: 24px !important;
+    align-self: center !important;
+  }
+
+  .home-v24-name {
+    align-self: center !important;
+  }
+}
