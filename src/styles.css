@@ -14458,3 +14458,19 @@ body.menu-open {
     border-color: rgba(207, 207, 207, .22);
   }
 }
+
+/* Variant 103: stop mobile drift. Nav starts higher; About uses the full centered mobile rail. */
+@media (max-width: 980px) {
+  .mobile-menu {
+    padding-top: calc(124px + env(safe-area-inset-top)) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-v32-shell {
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
