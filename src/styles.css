@@ -14768,3 +14768,56 @@ body.menu-open {
     -webkit-backdrop-filter: var(--mobile-nav-backdrop) !important;
   }
 }
+
+
+/* Variant 109: mobile tool stack as a real five-column grid, not a ragged sentence. */
+@media (max-width: 700px) {
+  .about-v32-stack-cloud {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  .about-v32-stack-cloud .tech-chip {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 58px !important;
+    padding: 7px 4px 6px !important;
+    border-radius: 13px !important;
+    display: grid !important;
+    grid-template-rows: 22px minmax(0, 1fr) !important;
+    place-items: center !important;
+    gap: 4px !important;
+    background: rgba(255, 247, 232, .055) !important;
+    border: 1px solid rgba(255, 247, 232, .08) !important;
+  }
+
+  .about-v32-stack-cloud .tech-chip svg,
+  .about-v32-stack-cloud .tech-chip img,
+  .about-v32-stack-cloud .tech-chip strong {
+    width: 20px !important;
+    height: 20px !important;
+    flex: 0 0 20px !important;
+    max-width: 28px !important;
+  }
+
+  .about-v32-stack-cloud .tech-chip[data-tech="XGBoost"] img {
+    width: 28px !important;
+    height: 18px !important;
+    flex-basis: 28px !important;
+  }
+
+  .about-v32-stack-cloud .tech-chip em {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    font-size: clamp(.46rem, 1.8vw, .62rem) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -.02em !important;
+  }
+}
