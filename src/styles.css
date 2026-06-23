@@ -14474,3 +14474,17 @@ body.menu-open {
     margin-right: auto !important;
   }
 }
+
+/* Variant 104: mobile nav should not sit on top of reading content while scrolling. */
+@media (max-width: 980px) {
+  .nav-wrap {
+    transition: transform 180ms ease-out, opacity 180ms ease-out !important;
+    will-change: transform, opacity;
+  }
+
+  .nav-wrap.mobile-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translate(-50%, -86px) !important;
+  }
+}

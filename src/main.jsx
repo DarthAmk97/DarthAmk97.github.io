@@ -813,11 +813,45 @@ function App() {
   const { path, navigate } = useRoute();
   const [menuOpen, setMenuOpen] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   useGsapPage(path);
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }));
     return () => window.cancelAnimationFrame(frame);
   }, [path]);
+  useEffect(() => {
+    setNavHidden(false);
+  }, [path]);
+  useEffect(() => {
+    let ticking = false;
+
+    const update = () => {
+      const currentY = window.scrollY;
+      const isMobile = window.matchMedia('(max-width: 980px)').matches;
+
+      if (!isMobile || menuOpen || currentY < 96) {
+        setNavHidden(false);
+      } else {
+        setNavHidden(true);
+      }
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [menuOpen]);
   useEffect(() => {
     const onKey = (event) => {
       if (event.key === 'Escape') {
@@ -871,7 +905,7 @@ function App() {
     <main className="app-shell overflow-lock">
       <ShaderField />
       <NoiseLayer />
-      <Nav path={path} navigate={navigate} menuOpen={menuOpen} setMenuOpen={setMenuOpen} onPaletteOpen={() => setPaletteOpen(true)} />
+      <Nav path={path} navigate={navigate} menuOpen={menuOpen} navHidden={navHidden} setMenuOpen={setMenuOpen} onPaletteOpen={() => setPaletteOpen(true)} />
       {page}
       {!['/portfolio', '/about', '/papers', '/blogs', '/resume', '/contribution-snake'].includes(path) && <Footer navigate={navigate} />}
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} onRun={runPaletteAction} />
@@ -903,13 +937,13 @@ function NoiseLayer() {
   return <div className="noise-layer" aria-hidden="true" />;
 }
 
-function Nav({ path, navigate, menuOpen, setMenuOpen, onPaletteOpen }) {
+function Nav({ path, navigate, menuOpen, navHidden, setMenuOpen, onPaletteOpen }) {
   const closeNavigate = (next) => {
     setMenuOpen(false);
     navigate(next);
   };
   return (
-    <header className="nav-wrap" data-reveal>
+    <header className={navHidden && !menuOpen ? 'nav-wrap mobile-hidden' : 'nav-wrap'} data-reveal>
       <button className="brand-pill" onClick={() => closeNavigate('/')} aria-label="Go home">
         <span className="brand-mark"><img src={brandIcons.avatarHead} alt="" /></span>
         <span>Abdullah Khawaja</span>
