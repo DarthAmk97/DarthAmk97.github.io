@@ -14416,6 +14416,10 @@ body.menu-open {
 
 /* Variant 102: phones get readable resume text, not a broken PDF pan box. */
 @media (max-width: 700px) {
+  .about-v32 {
+    padding-bottom: 18px !important;
+  }
+
   .resume-v42-viewer {
     border: 0 !important;
     background: transparent !important;
