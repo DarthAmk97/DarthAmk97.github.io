@@ -1406,6 +1406,7 @@ function Portfolio() {
   const [highlightTargeted, setHighlightTargeted] = useState(() => sessionStorage.getItem('portfolio-focus') === 'highlights');
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const caseRef = useRef(null);
   const projects = useMemo(() => {
     if (branch === 'all') return allProjects;
     return allProjects.filter((project) => project.branch === branch);
@@ -1460,6 +1461,28 @@ function Portfolio() {
     setGalleryOpen(false);
   }, [selected?.key]);
 
+  const scrollCaseOnMobile = () => {
+    if (typeof window === 'undefined') return;
+    if (!window.matchMedia('(max-width: 760px)').matches) return;
+    window.setTimeout(() => {
+      const target = caseRef.current;
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 18;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 120);
+  };
+
+  const handleBranchChange = (nextBranch) => {
+    const nextProjects = nextBranch === 'all' ? allProjects : allProjects.filter((project) => project.branch === nextBranch);
+    setBranch(nextBranch);
+    if (nextProjects.length && !nextProjects.some((project) => project.key === selected?.key)) {
+      setSelected(nextProjects[0]);
+    }
+    if (nextBranch === 'work' || nextBranch === 'personal') {
+      scrollCaseOnMobile();
+    }
+  };
+
   const moveGallery = (direction) => {
     if (galleryItems.length < 2) return;
     setGalleryIndex((index) => (index + direction + galleryItems.length) % galleryItems.length);
@@ -1468,6 +1491,7 @@ function Portfolio() {
   const pickProject = (project) => {
     setHighlightTargeted(false);
     setSelected(project);
+    scrollCaseOnMobile();
   };
 
   return (
@@ -1484,7 +1508,7 @@ function Portfolio() {
           </p>
           <div className="portfolio-v24-filters" role="group" aria-label="Project filters">
             {Object.entries(branchLabels).map(([key, item]) => (
-              <button key={key} className={branch === key ? 'active' : ''} onClick={() => setBranch(key)}>
+              <button key={key} className={branch === key ? 'active' : ''} onClick={() => handleBranchChange(key)}>
                 <strong>{item.label}</strong>
                 <span>{item.detail}</span>
               </button>
@@ -1525,7 +1549,7 @@ function Portfolio() {
           </section>
 
           {selected && (
-            <article className={`portfolio-v24-case${selectedCase?.gallery ? ' has-gallery' : ''}`} aria-label={`${selected.name} details`}>
+            <article ref={caseRef} className={`portfolio-v24-case${selectedCase?.gallery ? ' has-gallery' : ''}`} aria-label={`${selected.name} details`} tabIndex={-1}>
               <div className="portfolio-v24-case-head">
                 <span className="portfolio-v24-case-icon">{selected.iconPath ? <img src={selected.iconPath} alt="" aria-hidden="true" /> : selected.icon}</span>
                 <div>
