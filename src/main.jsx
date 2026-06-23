@@ -315,7 +315,7 @@ const workProjects = [
     image: publicUrl('assets/profile-visual.png'),
     tech: ['Gemma', 'Vertex AI', 'Fine-tuning', 'Tool Calls', 'Databooks'],
     solves: 'Cut the serving bill without breaking the bits people already relied on.',
-    technical: 'Gemma 4 26B A4B IT prototype/pilot, 20K+ internal conversations, tool calls, databooks, Vertex AI inference, and projected lower serving spend.'
+    technical: 'Gemma 4 26B A4B IT prototype/pilot, 20K+ conversations from the live model chat, tool calls, databooks, Vertex AI inference, and projected lower serving spend.'
   },
   {
     key: 'udacity-ai-python',
@@ -744,10 +744,10 @@ const projectCasebook = {
   'dpd-chatbot': {
     command: 'case / dpd-chatbot-cost / serving-cost',
     pain: 'A support chatbot becomes expensive fast if every answer needs the costly serving path.',
-    result: 'Fine-tuned on 20K+ internal conversations with tool calls and databooks; forecasts project 65% lower chatbot spend.',
+    result: 'Fine-tuned on 20K+ conversations from the live model chat with tool calls and databooks; forecasts project 65% lower chatbot spend.',
     build: 'Gemma 4 26B A4B IT, custom databooks at response time, tool calls, and economical Vertex AI inference.',
     highlights: [
-      ['training data', '20K+ internal conversations'],
+      ['training data', '20K+ live-chat conversations'],
       ['serving', 'Vertex AI'],
       ['cost', 'projected 65% lower spend'],
       ['guardrail', 'preserve tool behaviour']
@@ -1890,36 +1890,44 @@ function ResumePage() {
     {
       label: 'work',
       title: 'Machine Learning Engineer — DPD Group',
+      Icon: Brain,
+      summary: <>Current work. <strong>Chatbot fine-tuning</strong>, churn, and forecasting.</>,
       items: [
-        'Fine-tuned Gemma for the DPD chatbot using internal conversations, tool calls, and databooks; projected lower serving spend.',
-        'Built the churn meta-ensemble that caught 67% of total churn cases; $650K saved so far.',
-        'Built volume forecasting that beat a 12-year human benchmark by +8% across 80+ hubs.'
+        <><strong>Chatbot fine-tuning:</strong> Gemma tuned on <mark>conversations from the live model chat</mark>, plus tool calls and databooks. <em>Projected lower serving spend.</em></>,
+        <><strong>Churn:</strong> meta-ensemble caught <mark>67% of total churn cases</mark>; <strong>$650K</strong> saved so far.</>,
+        <><strong>Forecasting:</strong> volume model beat a 12-year human benchmark by <mark>+8%</mark> across 80+ hubs.</>
       ]
     },
     {
       label: 'before',
       title: 'Daraz, Dastgyr, Udacity',
+      Icon: Graph,
+      summary: <>Marketplace ranking, recommender systems, and teaching.</>,
       items: [
-        'Daraz: Wide & Deep ranking, LTR, 50+ A/B tests, and about +35% conversion lift.',
-        'Dastgyr: SWING recommender for Top For You, +1.44% basket-size uplift and +22% AOV.',
-        'Udacity: led AI/Python learning sessions and helped learners get code running.'
+        <><strong>Daraz:</strong> Wide & Deep ranking, LTR, 50+ A/B tests, about <mark>+35% conversion lift</mark>.</>,
+        <><strong>Dastgyr:</strong> SWING recommender for Top For You; <mark>+1.44% basket size</mark> and <mark>+22% AOV</mark>.</>,
+        <><strong>Udacity:</strong> led AI/Python sessions and helped learners get code running.</>
       ]
     },
     {
       label: 'projects',
       title: 'Things I built outside work',
+      Icon: RocketLaunch,
+      summary: <>Small tools, public releases, and writing.</>,
       items: [
-        'Sort Moments: local-first event photo sorting for 4,000+ image sets.',
-        'WeaveSkip: turns one source into platform-native drafts with review before publish.',
-        'Hugging Face releases and Navigating Noise: small-model experiments and writing.'
+        <><strong>Sort Moments:</strong> local-first event photo sorting for <mark>4,000+ image sets</mark>.</>,
+        <><strong>WeaveSkip:</strong> one source becomes platform-native drafts, with review before publish.</>,
+        <><strong>Hugging Face + Navigating Noise:</strong> small-model experiments and writing.</>
       ]
     },
     {
       label: 'education',
       title: 'Education',
+      Icon: Buildings,
+      summary: <>Formal base. MSc distinction, CS at FAST.</>,
       items: [
-        'MSc Data Science, University of Essex — Distinction.',
-        'BS Computer Science, FAST-NU.'
+        <><strong>MSc Data Science</strong>, University of Essex — <mark>Distinction</mark>.</>,
+        <><strong>BS Computer Science</strong>, FAST-NU.</>
       ]
     }
   ];
@@ -1981,10 +1989,16 @@ function ResumePage() {
             </div>
             {mobileResumeSections.map((section) => (
               <article key={section.label}>
-                <code>{section.label}</code>
-                <h3>{section.title}</h3>
+                <div className="resume-v44-section-head">
+                  <span className="resume-v44-section-icon"><section.Icon size={18} weight="duotone" /></span>
+                  <div>
+                    <code>{section.label}</code>
+                    <h3>{section.title}</h3>
+                  </div>
+                </div>
+                <p className="resume-v44-section-summary">{section.summary}</p>
                 <ul>
-                  {section.items.map((item) => <li key={item}>{item}</li>)}
+                  {section.items.map((item, index) => <li key={`${section.label}-${index}`}>{item}</li>)}
                 </ul>
               </article>
             ))}
