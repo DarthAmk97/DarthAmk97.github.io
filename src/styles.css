@@ -14875,3 +14875,61 @@ body.menu-open {
     align-self: center !important;
   }
 }
+
+
+/* Variant 112: mobile resume should carry the real DPD detail and keep project logos visible. */
+@media (max-width: 700px) {
+  .resume-v44-section-work ul {
+    gap: 10px !important;
+  }
+
+  .resume-v44-section-work li {
+    padding: 12px 12px 12px 32px !important;
+    border: 1px solid rgba(167, 122, 216, .16);
+    border-radius: 15px;
+    background: rgba(7, 7, 9, .42);
+    line-height: 1.42 !important;
+  }
+
+  .resume-v44-section-work li::before {
+    left: 13px !important;
+    top: 1.25em !important;
+  }
+
+  .resume-v44-project-item {
+    display: grid !important;
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    align-items: start !important;
+    padding-left: 0 !important;
+  }
+
+  .resume-v44-project-item::before {
+    content: none !important;
+  }
+
+  .resume-v44-project-logo {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 247, 232, .92);
+    border: 1px solid rgba(255, 247, 232, .18);
+  }
+
+  .resume-v44-project-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .project-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+}

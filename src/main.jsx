@@ -199,7 +199,7 @@ const personalProjects = [
   {
     key: 'sort-moments',
     name: 'Sort Moments',
-    tag: 'Event photos, sorted locally',
+    tag: '359 downloads, 2.3K visitors',
     icon: 'SM',
     iconPath: brandIcons.sortMoments,
     image: publicUrl('assets/project-device-shot.jpg'),
@@ -207,33 +207,33 @@ const personalProjects = [
     source: links.sortMomentsGithub,
     tech: ['Python', 'PyQt6', 'RetinaFace', 'InsightFace', 'DirectML'],
     domain: 'event photo sorting',
-    solves: 'Event folders become work nobody asked for: thousands of images, repeats, group shots, and people waiting for their pictures.',
+    solves: 'Event folders become work nobody asked for: thousands of images, repeats, group shots, and people waiting for their pictures. Public site now shows 359 downloads and 2,390 visitors.',
     technical: 'Face detection, embeddings, clustering, DirectML where it helps, and a human review step because the model should not pretend it knows every face.'
   },
   {
     key: 'weaveskip',
     name: 'WeaveSkip',
-    tag: 'One post, many drafts',
+    tag: '5.3K visitors, 8 batches',
     icon: 'WS',
     iconPath: brandIcons.weaveSkip,
     image: publicUrl('assets/project-recommender-card.jpg'),
     link: links.weaveSkip,
     tech: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL', 'Redis', 'OAuth', 'Stripe'],
     domain: 'content distribution',
-    solves: 'Write once, then stop doing the same boring edit six times for six platforms.',
+    solves: 'Write once, then stop doing the same boring edit six times for six platforms. The public site shows 5,344 visitors, 3 signups, 8 post batches, and 100% kept without edits.',
     technical: 'Next.js, queues, OAuth, BYOK, schedules, draft states, and review before anything goes out.'
   },
   {
     key: 'neighbourfit',
     name: 'NeighbourFit',
-    tag: 'Area check before a viewing',
+    tag: 'postcode checker + maps',
     icon: 'NF',
     iconPath: brandIcons.neighbourFit,
     image: publicUrl('assets/neighbourfit-poster.png'),
     link: links.neighbourFit,
     tech: ['React', 'TypeScript', 'FastAPI', 'PostGIS', 'Mapbox', 'OpenAI'],
     domain: 'postcode fit',
-    solves: 'A flat is not just the flat. The commute, price, area, and daily routine matter before you lose a Saturday viewing it.',
+    solves: 'A flat is not just the flat. NeighbourFit keeps Overview, Map Intelligence, UK postcode checks, waitlist, FAQ, Privacy, and llms.txt open while rental discovery stays in private beta.',
     technical: 'React, FastAPI, PostGIS, Mapbox, preference scoring, maps, saved lists, and summaries that say where the data gets weak.'
   },
   {
@@ -315,7 +315,7 @@ const workProjects = [
     image: publicUrl('assets/profile-visual.png'),
     tech: ['Gemma', 'Vertex AI', 'Fine-tuning', 'Tool Calls', 'Databooks'],
     solves: 'Cut the serving bill without breaking the bits people already relied on.',
-    technical: 'Gemma 4 26B A4B IT prototype/pilot, 20K+ conversations from the live model chat, tool calls, databooks, Vertex AI inference, and projected lower serving spend.'
+    technical: 'Gemma 4 E4B IT on 20K+ internal customer-chatbot conversations, tool calls, custom databooks recalled at response time, Vertex AI inference, and projected 65% lower chatbot spend.'
   },
   {
     key: 'udacity-ai-python',
@@ -612,10 +612,12 @@ const projectCasebook = {
   'sort-moments': {
     command: 'case / sort-moments / local-first',
     pain: 'Large event shoots create thousands of repeats, solo shots, group shots, and folders nobody wants to sort by hand.',
-    result: 'Built for 4,000+ image event sets with local detection, clustering, correction, and no automatic cloud upload.',
+    result: 'Public site shows 359 downloads and 2,390 visitors; built for 4,000+ image event sets with local detection, clustering, correction, and no automatic cloud upload.',
     build: 'RetinaFace detects faces. InsightFace/Buffalo Large creates embeddings. PyQt6 keeps it on desktop. DirectML helps on supported machines.',
     highlights: [
       ['domain', 'event photo sorting'],
+      ['downloads', '359 public downloads'],
+      ['visitors', '2,390 site visitors'],
       ['scale', '4,000+ image sets'],
       ['privacy', 'local-first workflow'],
       ['review', 'human cluster correction']
@@ -625,10 +627,14 @@ const projectCasebook = {
   weaveskip: {
     command: 'case / weaveskip / distribution',
     pain: 'Writing the source is the hard part. Reshaping it for six platforms is usually boring work with a new shirt on.',
-    result: 'One article, RSS feed, or manual source becomes platform-native drafts. Review comes before publish.',
+    result: 'Public site shows 5,344 visitors, 3 signups, 8 post batches, 100% kept without edits, and 2 finished posts.',
     build: 'Next.js, TypeScript, Prisma, PostgreSQL, Redis/BullMQ, NextAuth, OAuth, S3, Stripe, Zod, BYOK config, queues, and review states.',
     highlights: [
       ['domain', 'content distribution'],
+      ['visitors', '5,344 total visitors'],
+      ['signups', '3 total signups'],
+      ['batches', '8 post batches'],
+      ['kept', '100% kept without edits'],
       ['source', 'article, RSS, or manual'],
       ['guardrail', 'review before publish'],
       ['stack', 'Next.js + queues']
@@ -638,10 +644,12 @@ const projectCasebook = {
   neighbourfit: {
     command: 'case / neighbourfit / postcode-context',
     pain: 'Property portals show the flat. They do not explain whether the area fits the commute, budget, habits, and daily trade-offs.',
-    result: 'Preference capture, geospatial scoring, commute and amenity context, explainable fit breakdowns, maps, and saved lists.',
+    result: 'Open now: Overview, Map Intelligence, UK rental postcode checker, waitlist, FAQ, Privacy, and llms.txt; private beta covers profile, saved searches, agentic rental discovery, billing, and accounts.',
     build: 'React, TypeScript, FastAPI, PostgreSQL/PostGIS, Mapbox, OpenAI, scikit-learn, and source-aware summaries with caveats.',
     highlights: [
       ['domain', 'postcode fit'],
+      ['open now', 'Map Intelligence + postcode checker'],
+      ['beta', 'profile + rental discovery'],
       ['checks', 'commute + amenities'],
       ['style', 'source-aware caveats'],
       ['promise', 'context, not a verdict']
@@ -744,10 +752,10 @@ const projectCasebook = {
   'dpd-chatbot': {
     command: 'case / dpd-chatbot-cost / serving-cost',
     pain: 'A support chatbot becomes expensive fast if every answer needs the costly serving path.',
-    result: 'Fine-tuned on 20K+ conversations from the live model chat with tool calls and databooks; forecasts project 65% lower chatbot spend.',
-    build: 'Gemma 4 26B A4B IT, custom databooks at response time, tool calls, and economical Vertex AI inference.',
+    result: 'Fine-tuned Gemma 4 E4B IT on 20K+ internal customer-chatbot conversations with tool calls and custom databooks recalled at response time; forecasts project 65% lower chatbot spend.',
+    build: 'Gemma 4 E4B IT, 20K+ internal customer-chatbot conversations, custom databooks recalled at response time, tool calls, and economical Vertex AI inference.',
     highlights: [
-      ['training data', '20K+ live-chat conversations'],
+      ['training data', '20K+ chatbot conversations'],
       ['serving', 'Vertex AI'],
       ['cost', 'projected 65% lower spend'],
       ['guardrail', 'preserve tool behaviour']
@@ -1673,7 +1681,7 @@ function ProjectCard({ project, index, onOpen }) {
         <img src={project.image} alt={`${project.name} visual`} />
       </div>
       <div className="project-copy">
-        <div className="project-icon">{project.icon}</div>
+        <div className="project-icon">{project.iconPath ? <img src={project.iconPath} alt="" aria-hidden="true" /> : project.icon}</div>
         <p>{project.tag}</p>
         <h3>{project.name}</h3>
         <div className="project-tech-row">
@@ -1926,9 +1934,9 @@ function ResumePage() {
       Icon: Brain,
       summary: <>Current work. <strong>Chatbot fine-tuning</strong>, churn, and forecasting.</>,
       items: [
-        <>Consumer Chatbot Modernization: Fine-tuned Gemma 4 E4B IT on 20K+ internal customer-chatbot conversations, including tool calls and custom databooks recalled at response time, replacing Gemini-based serving with economical, Google-native inference on Vertex AI; business forecasts project 65% lower chatbot spend.</>,
-        <><strong>Churn:</strong> meta-ensemble caught <mark>67% of total churn cases</mark>; <strong>$650K</strong> saved so far.</>,
-        <><strong>Forecasting:</strong> volume model beat a 12-year human benchmark by <mark>+8%</mark> across 80+ hubs.</>
+        <><strong>Consumer Chatbot Modernization:</strong> Fine-tuned <strong>Gemma 4 E4B IT</strong> on <mark>20K+ internal customer-chatbot conversations</mark>, including tool calls and custom databooks recalled at response time, replacing Gemini-based serving with economical, Google-native inference on Vertex AI; business forecasts project <mark>65% lower chatbot spend</mark>.</>,
+        <><strong>Customer Retention (Churn Prediction):</strong> Architected a 6-model meta-ensemble (including Dual LightGBMs, WaveNet, Logistic Hazard, and a Hybrid XGBoost-Transformer) that achieved the <strong>highest predictive performance across DPD Group</strong>. Accurately identified <mark>64% of flagged customers</mark> as true churners and captured <mark>67% of total churn cases</mark>, with savings of <strong>$650K recorded so far</strong>.</>,
+        <><strong>Volume Forecasting:</strong> Developed a deep learning model (Mixture of Experts, RNN, WaveNet) surpassing a 12-year human benchmark by <mark>+8%</mark>. Replaced fixed lags with <strong>event-based lags</strong> (Amazon Prime Day, Bank Holidays) to capture seasonality accurately, delivering consistent daily accuracy for <mark>80+ hubs</mark>.</>
       ]
     },
     {
@@ -1948,9 +1956,10 @@ function ResumePage() {
       Icon: RocketLaunch,
       summary: <>Small tools, public releases, and writing.</>,
       items: [
-        <><strong>Sort Moments:</strong> local-first event photo sorting for <mark>4,000+ image sets</mark>.</>,
-        <><strong>WeaveSkip:</strong> one source becomes platform-native drafts, with review before publish.</>,
-        <><strong>Hugging Face + Navigating Noise:</strong> small-model experiments and writing.</>
+        { iconPath: brandIcons.sortMoments, content: <><strong>Sort Moments:</strong> local-first event photo sorting; public site shows <mark>359 downloads</mark> and <mark>2,390 visitors</mark>.</> },
+        { iconPath: brandIcons.weaveSkip, content: <><strong>WeaveSkip:</strong> one source becomes platform-native drafts; public site shows <mark>5,344 visitors</mark>, <mark>8 post batches</mark>, and <mark>100% kept without edits</mark>.</> },
+        { iconPath: brandIcons.neighbourFit, content: <><strong>NeighbourFit:</strong> postcode checker and Map Intelligence are open; rental discovery is in private beta.</> },
+        { iconPath: brandIcons.huggingface, content: <><strong>Hugging Face + Navigating Noise:</strong> small-model experiments and writing.</> }
       ]
     },
     {
@@ -2021,7 +2030,7 @@ function ResumePage() {
               <p>Same resume content, rebuilt as text for phone screens.</p>
             </div>
             {mobileResumeSections.map((section) => (
-              <article key={section.label}>
+              <article key={section.label} className={`resume-v44-section-${section.label}`}>
                 <div className="resume-v44-section-head">
                   <span className="resume-v44-section-icon"><section.Icon size={18} weight="duotone" /></span>
                   <div>
@@ -2031,7 +2040,14 @@ function ResumePage() {
                 </div>
                 <p className="resume-v44-section-summary">{section.summary}</p>
                 <ul>
-                  {section.items.map((item, index) => <li key={`${section.label}-${index}`}>{item}</li>)}
+                  {section.items.map((item, index) => {
+                    const isRichProject = item && typeof item === 'object' && item.content;
+                    return (
+                      <li key={`${section.label}-${index}`} className={isRichProject ? 'resume-v44-project-item' : undefined}>
+                        {isRichProject ? <><span className="resume-v44-project-logo"><img src={item.iconPath} alt="" aria-hidden="true" /></span><span>{item.content}</span></> : item}
+                      </li>
+                    );
+                  })}
                 </ul>
               </article>
             ))}
