@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource/ibm-plex-mono/400.css';
@@ -1501,7 +1501,7 @@ function Portfolio() {
             <ReactBitsProfileCard onHome={() => navigate('/')} />
           </div>
           <p className="profile-kicker">work</p>
-          <h1>Things I can talk through.</h1>
+          <h1>Stuff I've done and like to show off</h1>
           <p>
             DPD now. Daraz, Dastgyr, Udacity before. Sort Moments, WeaveSkip, NeighbourFit when the day job leaves enough brain.
           </p>
