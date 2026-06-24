@@ -1728,7 +1728,7 @@ function PapersPage({ navigate }) {
           <p className="profile-kicker">papers</p>
           <h1>Papers I come back to.</h1>
           <p>
-            Five papers I keep around because they make clean ML claims feel a little less clean.
+            A collection of papers I really like. This might tell you what intrigues me. I will keep adding more as I doomscroll social media.
           </p>
           <button type="button" onClick={() => navigate('/blogs')}>
             Open blogs <ArrowUpRight size={16} />
