@@ -1926,7 +1926,7 @@ function ResumePage() {
       Icon: Brain,
       summary: <>Current work. <strong>Chatbot fine-tuning</strong>, churn, and forecasting.</>,
       items: [
-        <><strong>Chatbot fine-tuning:</strong> Gemma tuned on <mark>conversations from the live model chat</mark>, plus tool calls and databooks. <em>Projected lower serving spend.</em></>,
+        <>Consumer Chatbot Modernization: Fine-tuned Gemma 4 E4B IT on 20K+ internal customer-chatbot conversations, including tool calls and custom databooks recalled at response time, replacing Gemini-based serving with economical, Google-native inference on Vertex AI; business forecasts project 65% lower chatbot spend.</>,
         <><strong>Churn:</strong> meta-ensemble caught <mark>67% of total churn cases</mark>; <strong>$650K</strong> saved so far.</>,
         <><strong>Forecasting:</strong> volume model beat a 12-year human benchmark by <mark>+8%</mark> across 80+ hubs.</>
       ]
