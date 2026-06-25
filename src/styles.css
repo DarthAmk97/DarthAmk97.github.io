@@ -15061,3 +15061,19 @@ body.menu-open {
     display: block !important;
   }
 }
+
+/* Variant 113.1: dark SVG project marks must not disappear on the dark mobile resume. */
+@media (max-width: 700px) {
+  .resume-v44-project-logo img[src*="huggingface.svg"],
+  .resume-v44-project-logo img[src*="hackernoon.svg"] {
+    object-fit: contain !important;
+    padding: 4px !important;
+    filter: invert(1) brightness(1.08) !important;
+  }
+
+  .resume-v44-project-logo img[src*="weaveskip.png"] {
+    object-fit: contain !important;
+    padding: 2px !important;
+    filter: brightness(1.35) contrast(1.15) !important;
+  }
+}
