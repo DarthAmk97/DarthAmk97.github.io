@@ -199,7 +199,7 @@ const personalProjects = [
   {
     key: 'sort-moments',
     name: 'Sort Moments',
-    tag: '359 downloads, 2.3K visitors',
+    tag: '407 downloads, 2.5K visitors',
     icon: 'SM',
     iconPath: brandIcons.sortMoments,
     image: publicUrl('assets/project-device-shot.jpg'),
@@ -207,7 +207,7 @@ const personalProjects = [
     source: links.sortMomentsGithub,
     tech: ['Python', 'PyQt6', 'RetinaFace', 'InsightFace', 'DirectML'],
     domain: 'event photo sorting',
-    solves: 'Event folders become work nobody asked for: thousands of images, repeats, group shots, and people waiting for their pictures. Public site now shows 359 downloads and 2,390 visitors.',
+    solves: 'Event folders become work nobody asked for: thousands of images, repeats, group shots, and people waiting for their pictures. Public site now shows 407 downloads and 2,501 visitors.',
     technical: 'Face detection, embeddings, clustering, DirectML where it helps, and a human review step because the model should not pretend it knows every face.'
   },
   {
@@ -226,14 +226,14 @@ const personalProjects = [
   {
     key: 'neighbourfit',
     name: 'NeighbourFit',
-    tag: 'postcode checker + maps',
+    tag: '136 postcode lookups',
     icon: 'NF',
     iconPath: brandIcons.neighbourFit,
     image: publicUrl('assets/neighbourfit-poster.png'),
     link: links.neighbourFit,
     tech: ['React', 'TypeScript', 'FastAPI', 'PostGIS', 'Mapbox', 'OpenAI'],
     domain: 'postcode fit',
-    solves: 'A flat is not just the flat. NeighbourFit keeps Overview, Map Intelligence, UK postcode checks, waitlist, FAQ, Privacy, and llms.txt open while rental discovery stays in private beta.',
+    solves: 'A flat is not just the flat. NeighbourFit has logged 136 postcode lookups, with Map Intelligence and the UK postcode checker open while rental discovery stays in private beta.',
     technical: 'React, FastAPI, PostGIS, Mapbox, preference scoring, maps, saved lists, and summaries that say where the data gets weak.'
   },
   {
@@ -612,12 +612,12 @@ const projectCasebook = {
   'sort-moments': {
     command: 'case / sort-moments / local-first',
     pain: 'Large event shoots create thousands of repeats, solo shots, group shots, and folders nobody wants to sort by hand.',
-    result: 'Public site shows 359 downloads and 2,390 visitors; built for 4,000+ image event sets with local detection, clustering, correction, and no automatic cloud upload.',
+    result: 'Public site shows 407 downloads and 2,501 visitors; built for 4,000+ image event sets with local detection, clustering, correction, and no automatic cloud upload.',
     build: 'RetinaFace detects faces. InsightFace/Buffalo Large creates embeddings. PyQt6 keeps it on desktop. DirectML helps on supported machines.',
     highlights: [
       ['domain', 'event photo sorting'],
-      ['downloads', '359 public downloads'],
-      ['visitors', '2,390 site visitors'],
+      ['downloads', '407 public downloads'],
+      ['visitors', '2,501 site visitors'],
       ['scale', '4,000+ image sets'],
       ['privacy', 'local-first workflow'],
       ['review', 'human cluster correction']
@@ -644,10 +644,11 @@ const projectCasebook = {
   neighbourfit: {
     command: 'case / neighbourfit / postcode-context',
     pain: 'Property portals show the flat. They do not explain whether the area fits the commute, budget, habits, and daily trade-offs.',
-    result: 'Open now: Overview, Map Intelligence, UK rental postcode checker, waitlist, FAQ, Privacy, and llms.txt; private beta covers profile, saved searches, agentic rental discovery, billing, and accounts.',
+    result: 'Public counter shows 136 postcode lookups. Map Intelligence and the UK postcode checker are open; private beta covers profile, saved searches, agentic rental discovery, billing, and accounts.',
     build: 'React, TypeScript, FastAPI, PostgreSQL/PostGIS, Mapbox, OpenAI, scikit-learn, and source-aware summaries with caveats.',
     highlights: [
       ['domain', 'postcode fit'],
+      ['lookups', '136 postcode lookups'],
       ['open now', 'Map Intelligence + postcode checker'],
       ['beta', 'profile + rental discovery'],
       ['checks', 'commute + amenities'],
@@ -1956,9 +1957,9 @@ function ResumePage() {
       Icon: RocketLaunch,
       summary: <>Small tools, public releases, and writing.</>,
       items: [
-        { iconPath: brandIcons.sortMoments, content: <><strong>Sort Moments:</strong> local-first event photo sorting; public site shows <mark>359 downloads</mark> and <mark>2,390 visitors</mark>.</> },
+        { iconPath: brandIcons.sortMoments, content: <><strong>Sort Moments:</strong> local-first event photo sorting; public site shows <mark>407 downloads</mark> and <mark>2,501 visitors</mark>.</> },
         { iconPath: brandIcons.weaveSkip, content: <><strong>WeaveSkip:</strong> one source becomes platform-native drafts; public site shows <mark>5,344 visitors</mark>, <mark>8 post batches</mark>, and <mark>100% kept without edits</mark>.</> },
-        { iconPath: brandIcons.neighbourFit, content: <><strong>NeighbourFit:</strong> postcode checker and Map Intelligence are open; rental discovery is in private beta.</> },
+        { iconPath: brandIcons.neighbourFit, content: <><strong>NeighbourFit:</strong> <mark>136 postcode lookups</mark>; Map Intelligence and the postcode checker are open while rental discovery is in private beta.</> },
         { iconPath: brandIcons.huggingface, content: <><strong>Hugging Face + Navigating Noise:</strong> small-model experiments and writing.</> }
       ]
     },

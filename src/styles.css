@@ -14933,3 +14933,131 @@ body.menu-open {
     display: block;
   }
 }
+
+/* Variant 113: mobile resume readability pass. No candy-highlighter blocks, no white logo tiles. */
+@media (max-width: 700px) {
+  .resume-v44-mobile-read {
+    gap: 12px !important;
+  }
+
+  .resume-v44-mobile-head,
+  .resume-v44-mobile-read article {
+    padding: 16px !important;
+    border-radius: 22px !important;
+    background: rgba(9, 9, 11, .78) !important;
+    border: 1px solid rgba(255, 247, 232, .12) !important;
+    box-shadow: none !important;
+  }
+
+  .resume-v44-section-head {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    align-items: center !important;
+  }
+
+  .resume-v44-section-icon {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 11px !important;
+    background: rgba(167, 122, 216, .18) !important;
+    color: #d9b8ff !important;
+    box-shadow: none !important;
+  }
+
+  .resume-v44-mobile-read code {
+    margin-bottom: 4px !important;
+    font-size: .72rem !important;
+    letter-spacing: .02em !important;
+  }
+
+  .resume-v44-mobile-read h3 {
+    font-size: 1.08rem !important;
+    line-height: 1.12 !important;
+    letter-spacing: -.02em !important;
+  }
+
+  .resume-v44-section-summary {
+    margin-top: 9px !important;
+    padding: 0 0 0 10px !important;
+    border: 0 !important;
+    border-left: 2px solid rgba(167, 122, 216, .72) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: rgba(255, 247, 232, .78) !important;
+    font-size: .92rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .resume-v44-mobile-read ul {
+    margin-top: 12px !important;
+    gap: 10px !important;
+    padding-left: 0 !important;
+    list-style: none !important;
+  }
+
+  .resume-v44-mobile-read li,
+  .resume-v44-section-work li {
+    padding: 0 0 0 14px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: rgba(255, 247, 232, .80) !important;
+    font-size: .94rem !important;
+    line-height: 1.48 !important;
+  }
+
+  .resume-v44-mobile-read li::before,
+  .resume-v44-section-work li::before {
+    left: 0 !important;
+    top: .62em !important;
+    width: 5px !important;
+    height: 5px !important;
+    background: #b88cff !important;
+    box-shadow: none !important;
+  }
+
+  .resume-v44-mobile-read strong {
+    color: #fff8ed !important;
+    font-weight: 900 !important;
+  }
+
+  .resume-v44-mobile-read em {
+    color: #fff1da !important;
+    font-style: italic !important;
+  }
+
+  .resume-v44-mobile-read mark {
+    display: inline !important;
+    padding: 0 .03em .04em !important;
+    border-radius: 0 !important;
+    color: #fff8ed !important;
+    font-weight: 900 !important;
+    background: linear-gradient(to top, rgba(184, 140, 255, .22) 0 30%, transparent 30% 100%) !important;
+    box-decoration-break: clone !important;
+    -webkit-box-decoration-break: clone !important;
+  }
+
+  .resume-v44-project-item {
+    grid-template-columns: 30px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    padding-left: 0 !important;
+    align-items: start !important;
+  }
+
+  .resume-v44-project-logo {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 9px !important;
+    overflow: hidden !important;
+    background: rgba(255, 247, 232, .055) !important;
+    border: 1px solid rgba(255, 247, 232, .10) !important;
+    box-shadow: none !important;
+  }
+
+  .resume-v44-project-logo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+}
