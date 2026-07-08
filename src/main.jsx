@@ -86,7 +86,7 @@ const links = {
   huggingface: 'https://huggingface.co/amkkk',
   substack: 'https://navigatingnoise.substack.com/',
   hackernoon: 'https://hackernoon.com/u/navigatingnoise',
-  resume: publicUrl('resume/Abdullah_Khawaja_Resume_v0.1.pdf'),
+  resume: publicUrl('resume/Abdullah-Khawaja-Resume-v1.pdf'),
   sortMoments: 'https://sortmoments.com/',
   sortMomentsGithub: 'https://github.com/DarthAmk97/sort-moments',
   weaveSkip: 'https://www.weaveskip.com/',
@@ -315,7 +315,7 @@ const workProjects = [
     image: publicUrl('assets/profile-visual.png'),
     tech: ['Gemma', 'Vertex AI', 'Fine-tuning', 'Tool Calls', 'Databooks'],
     solves: 'Cut the serving bill without breaking the bits people already relied on.',
-    technical: 'Gemma 4 E4B IT on 20K+ internal customer-chatbot conversations, tool calls, custom databooks recalled at response time, Vertex AI inference, and projected 65% lower chatbot spend.'
+    technical: 'Gemma 4B-IT on 20K+ internal customer-chatbot conversations, tool calls, custom databooks recalled at response time, a local-vs-Gemini 3.5 Flash router, and projected ~80% lower serving cost.'
   },
   {
     key: 'udacity-ai-python',
@@ -461,7 +461,7 @@ const maintainerDispatches = [
     command: 'gh release view shipped-work',
     title: 'Work that made it into use.',
     summary: 'DPD now. Alibaba/Daraz, Dastgyr, and Udacity before. The boring test is still the right one: did it help someone do the job?',
-    proof: '$650K retained revenue, +8% forecast-accuracy lift, ~34% LTR conversion lift, projected 65% lower chatbot serving spend',
+    proof: '$650K retained revenue, +8% forecast lift, ~34% LTR conversion lift, projected ~80% lower chatbot serving cost',
     status: 'live',
     work: 'DPD / Daraz / Dastgyr / chatbot cost work'
   },
@@ -522,7 +522,7 @@ const portfolioStoryBeats = [
     title: 'Chatbots made model cost painfully visible.',
     period: 'DPD chatbot cost work',
     body: 'Replacing a serving path means watching quality, latency, cost, and the person waiting on the answer all at once.',
-    result: 'projected 65% lower chatbot spend',
+    result: 'projected ~80% lower chatbot serving cost',
     command: 'pnpm test --quality-and-cost'
   },
   {
@@ -753,12 +753,12 @@ const projectCasebook = {
   'dpd-chatbot': {
     command: 'case / dpd-chatbot-cost / serving-cost',
     pain: 'A support chatbot becomes expensive fast if every answer needs the costly serving path.',
-    result: 'Fine-tuned Gemma 4 E4B IT on 20K+ internal customer-chatbot conversations with tool calls and custom databooks recalled at response time; forecasts project 65% lower chatbot spend.',
-    build: 'Gemma 4 E4B IT, 20K+ internal customer-chatbot conversations, custom databooks recalled at response time, tool calls, and economical Vertex AI inference.',
+    result: 'Fine-tuned Gemma 4B-IT on 20K+ internal customer-chatbot conversations with tool calls, databook recall, and DPO; runtime router projects ~80% lower serving cost.',
+    build: 'Gemma 4B-IT, Qwen/Gemma bake-off, Opus 4.8 LLM-as-Judge checks, local-vs-Gemini 3.5 Flash routing, and response-time databook recall.',
     highlights: [
       ['training data', '20K+ chatbot conversations'],
-      ['serving', 'Vertex AI'],
-      ['cost', 'projected 65% lower spend'],
+      ['serving', 'local model + Gemini 3.5 Flash'],
+      ['cost', '~20K GBP to ~4K GBP / month'],
       ['guardrail', 'preserve tool behaviour']
     ],
     limit: 'Lower cost is not a win if tool behaviour or context breaks. The engine change has to keep the parts people use.'
@@ -1912,7 +1912,7 @@ function ResumePage() {
   const [activePageIndex, setActivePageIndex] = useState(0);
   const resumeFacts = [
     ['current', 'Machine Learning Engineer at DPD Group'],
-    ['results', '$650K retained revenue, +8% forecast-accuracy lift, ~34% LTR conversion lift'],
+    ['results', '~80% chatbot serving-cost cut, $650K retained revenue, +8% forecast lift, ~34% LTR conversion lift'],
     ['history', 'DPD, Alibaba/Daraz, Dastgyr, Udacity, Sort Moments, WeaveSkip, NeighbourFit'],
     ['file', '2 pages from the PDF']
   ];
@@ -1933,9 +1933,10 @@ function ResumePage() {
       label: 'work',
       title: 'Machine Learning Engineer — DPD Group',
       Icon: Brain,
-      summary: <>Current work. <strong>Chatbot fine-tuning</strong>, churn, and forecasting.</>,
+      summary: <>Current work. <strong>Foundation models</strong>, LLM serving, churn, and forecasting.</>,
       items: [
-        <><strong>Consumer Chatbot Modernization:</strong> Fine-tuned <strong>Gemma 4 E4B IT</strong> on <mark>20K+ internal customer-chatbot conversations</mark>, including tool calls and custom databooks recalled at response time, replacing Gemini-based serving with economical, Google-native inference on Vertex AI; business forecasts project <mark>65% lower chatbot spend</mark>.</>,
+        <><strong>Foundation models:</strong> Ran a base-model bake-off across <strong>Qwen 0.8B</strong>, <strong>Gemma 2B-IT</strong>, and <strong>Gemma 4B-IT</strong>; fine-tuned the chosen Gemma 4B-IT model on <mark>20K+ internal chatbot conversations</mark> with tool calls and response-time databook recall, then applied DPO from recorded internal feedback.</>,
+        <><strong>LLM serving:</strong> Built the runtime router that chooses between the local model and <strong>Gemini 3.5 Flash</strong> using an Opus 4.8 LLM-as-Judge framework; projected serving cost dropped from <mark>~20K GBP</mark> to <mark>~4K GBP</mark> per month (<mark>~80%</mark>).</>,
         <><strong>Customer Retention (Churn Prediction):</strong> Architected a 6-model meta-ensemble (including Dual LightGBMs, WaveNet, Logistic Hazard, and a Hybrid XGBoost-Transformer) that achieved the <strong>highest predictive performance across DPD Group</strong>. Accurately identified <mark>64% of flagged customers</mark> as true churners and captured <mark>67% of total churn cases</mark>, with savings of <strong>$650K recorded so far</strong>.</>,
         <><strong>Volume Forecasting:</strong> Developed a deep learning model (Mixture of Experts, RNN, WaveNet) surpassing a 12-year human benchmark by <mark>+8%</mark>. Replaced fixed lags with <strong>event-based lags</strong> (Amazon Prime Day, Bank Holidays) to capture seasonality accurately, delivering consistent daily accuracy for <mark>80+ hubs</mark>.</>
       ]
