@@ -1,0 +1,164 @@
+{
+  "intro": {
+    "eyebrow": "machine learning, mostly",
+    "title": "Curiosity & Experiments: Contributions, and tests.",
+    "summary": "Models, experiments, reproductions, and the notes behind them. The finished work gets a proper write-up; the unfinished work stays plainly marked."
+  },
+  "pieces": [
+    {
+      "slug": "trace-inverter-4b-nobubble",
+      "status": "released",
+      "year": "2026",
+      "title": "Trace-Inverter-4B-NoBubble",
+      "dek": "Problem + final answer → synthetic reasoning trace. No reasoning bubble required.",
+      "summary": "The fine-tuned model would randomly fire reasoning, or not fire it at all. I needed a model that could build the missing trace from the problem and final answer alone.",
+      "links": [
+        { "label": "Hugging Face", "href": "https://huggingface.co/amkkk/Trace-Inverter-4B-NoBubble" },
+        { "label": "Paper", "href": "https://arxiv.org/abs/2603.07267" },
+        { "label": "LinkedIn", "href": "https://www.linkedin.com/feed/update/urn:li:activity:7500915542380199936/" },
+        { "label": "X", "href": "https://x.com/beholdshinigami/status/2091695415150149665" }
+      ],
+      "cover": "/assets/contributions/trace-inverter-results.png",
+      "blocks": [
+        {
+          "type": "heading",
+          "id": "why",
+          "text": "Why I built this"
+        },
+        {
+          "type": "paragraph",
+          "text": "Without a usable reasoning trace, the fine-tuned model did not know what to do with its own thinking. Sometimes it fired. Sometimes it did not. Sometimes it reasoned about an agent having to think instead of actually thinking."
+        },
+        {
+          "type": "paragraph",
+          "text": "The paper How to Steal Reasoning Without Reasoning Traces proposed learning a synthetic trace from what the target model does expose, rather than needing its hidden chain of thought."
+        },
+        {
+          "type": "heading",
+          "id": "two-settings",
+          "text": "The paper proposed both versions"
+        },
+        {
+          "type": "paragraph",
+          "text": "The first is the summary setting: problem, final answer, and a short reasoning summary — what I call the bubble — go into the inversion model. The second is the stricter no-summary setting: the problem and final answer go in without that bubble. The paper trains a separate inversion model for each setting."
+        },
+        {
+          "type": "formula",
+          "text": "With bubble:     I_sum(x, y, b) → t̂\nWithout bubble:  I_nosum(x, y) → t̂"
+        },
+        {
+          "type": "heading",
+          "id": "change",
+          "text": "What I changed"
+        },
+        {
+          "type": "formula",
+          "text": "I_no_bubble(x, y) → t̂"
+        },
+        {
+          "type": "paragraph",
+          "text": "Jackrong had already built the datasets and a bubble-conditioned Trace Inverter. I trained another Trace-Inverter-4B on the synthetic reasoning, using Qwen3-4B-Instruct-2507 as the base, and dropped the reasoning summaries from the inputs."
+        },
+        {
+          "type": "quote",
+          "text": "Fair to say, it works like magic."
+        },
+        {
+          "type": "heading",
+          "id": "results",
+          "text": "Results"
+        },
+        {
+          "type": "paragraph",
+          "text": "On the held-out public test, the NoBubble model reached 0.6500 Token F1 and 0.3916 ROUGE-L, against 0.4059 and 0.2081 for the base model. Format pass moved from 0% to 100%."
+        },
+        {
+          "type": "table",
+          "caption": "Held-out benchmark. Higher Token F1 and ROUGE-L are better; length ratio close to 1.0 is ideal.",
+          "headers": ["Model", "Bubble", "Setting", "Token F1", "ROUGE-L", "Length", "Format"],
+          "rows": [
+            ["Qwen3-4B Base", "No", "Zero-shot", "0.4059", "0.2081", "1.0358", "0%"],
+            ["Trace-Inverter-4B", "Yes", "Intended", "0.6821", "0.4276", "1.0227", "100%"],
+            ["Trace-Inverter-4B", "No", "OOD", "0.6061", "0.3710", "0.9998", "100%"],
+            ["Trace-Inverter-4B-NoBubble", "No", "Intended", "0.6500", "0.3916", "0.9366", "100%"]
+          ]
+        },
+        {
+          "type": "gallery",
+          "images": [
+            {
+              "src": "/assets/contributions/trace-inverter-example-1.png",
+              "alt": "Qwen3-4B base output showing a format failure",
+              "caption": "Base model: prose in the wrong wrapper."
+            },
+            {
+              "src": "/assets/contributions/trace-inverter-example-2.png",
+              "alt": "Trace-Inverter-4B-NoBubble output with structured reasoning",
+              "caption": "NoBubble: structured synthetic reasoning from problem + answer."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "id": "synthetic-better",
+          "text": "Synthetic reasoning can be better"
+        },
+        {
+          "type": "paragraph",
+          "text": "The paper also compared students trained on the actual reasoning traces against students trained on synthetic inverted traces. In some cases the synthetic traces performed better. The actual traces had backtracking and dead ends; the synthetic traces were cleaner, forward reasoning."
+        }
+      ]
+    },
+    {
+      "slug": "icml-2026-agent-repro-challenge",
+      "status": "completed",
+      "year": "2026",
+      "title": "ICML 2026 Agent Repro Challenge",
+      "dek": "491 claims across 164 papers. 7th place out of 364.",
+      "summary": "I finished 7th out of 364 on the leaderboard, after verifying 491 claims across 164 papers.",
+      "links": [
+        { "label": "Leaderboard", "href": "https://icml-2026-agent-repro-challenge.static.hf.space/leaderboard.html" },
+        { "label": "Certificate", "href": "/assets/contributions/icml-2026-repro-certificate.png" }
+      ],
+      "cover": "/assets/contributions/icml-2026-repro-certificate.png",
+      "blocks": [
+        {
+          "type": "heading",
+          "id": "contribution",
+          "text": "Moving the needle forward"
+        },
+        {
+          "type": "paragraph",
+          "text": "I joined to help move the needle forward on reproducibility. The work was claim by claim: 491 claims verified across 164 papers."
+        },
+        {
+          "type": "heading",
+          "id": "result",
+          "text": "Where I landed"
+        },
+        {
+          "type": "paragraph",
+          "text": "I finished 7th out of 364 entries on the leaderboard, under amkkk, with 277 logbooks and 1,674 points."
+        },
+        {
+          "type": "figure",
+          "src": "/assets/contributions/icml-2026-repro-certificate.png",
+          "alt": "ICML 2026 Open Reproductions certificate presented to Abdullah Mujeeb Khawaja",
+          "caption": "Certificate of participation — Reproducing ICML 2026: Open Reproductions."
+        }
+      ]
+    }
+  ],
+  "working": [
+    {
+      "title": "AMKwen 3.8 27B — Hybrid KDA",
+      "status": "in progress",
+      "description": "Testing a 27B AMKwen setup with hybrid Kimi Delta Attention. Notes and results land here once they stop moving."
+    },
+    {
+      "title": "DEFT AMKwen — Writing Well series",
+      "status": "in progress",
+      "description": "Applying Distribution Fine-Tuning ideas to the AMKwen Writing Well series. Still in progress."
+    }
+  ]
+}

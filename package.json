@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build",
+    "build": "npm run content:check && vite build",
+    "content:check": "node scripts/check-contributions.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {

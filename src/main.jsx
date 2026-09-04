@@ -59,6 +59,7 @@ import {
 import { TbSql } from 'react-icons/tb';
 import './styles.css';
 import { blogPosts } from './blogPosts.js';
+import Contributions from './Contributions.jsx';
 
 
 const appBase = import.meta.env.BASE_URL || '/';
@@ -120,6 +121,7 @@ const navItems = [
   { path: '/portfolio', label: 'Portfolio' },
   { path: '/papers', label: 'Papers' },
   { path: '/blogs', label: 'Blogs' },
+  { path: '/contributions', label: 'Contributions' },
   { path: '/resume', label: 'Resume' }
 ];
 
@@ -542,6 +544,7 @@ const paletteActions = [
   { id: 'portfolio', label: 'Portfolio', detail: 'Work, side projects, and case notes', path: '/portfolio', keys: 'portfolio projects cases work builds' },
   { id: 'papers', label: 'Papers I love', detail: 'Generalization, benchmark variance, model behaviour, anthropomorphism, and synthetic-user papers', path: '/papers', keys: 'papers research ml recommender llm' },
   { id: 'blogs', label: 'Blogs', detail: 'Navigating Noise, rewritten for this site', path: '/blogs', keys: 'blogs substack navigating noise writing articles' },
+  { id: 'contributions', label: 'Contributions', detail: 'Released models, write-ups, and work in progress', path: '/contributions', keys: 'contributions models research trace inverter amkwen' },
   { id: 'resume-page', label: 'Resume', detail: 'Read the PDF before downloading', path: '/resume', keys: 'resume cv pdf' },
   { id: 'resume-download', label: 'Download resume.pdf', detail: 'Save the PDF', href: links.resume, download: true, keys: 'download resume pdf cv' },
   { id: 'github', label: 'Open GitHub', detail: 'DarthAmk97', href: links.github, keys: 'github code repositories' },
@@ -565,7 +568,6 @@ const lovedPapers = [
     authors: 'Power, Burda, Edwards et al., 2022',
     lane: 'grokking',
     why: 'Neural networks can sit at chance-level generalization after overfitting, then suddenly get it right much later.',
-    note: 'Why I keep it: it separates memorization, training time, and generalization without pretending they are the same thing.',
     image: publicUrl('assets/paper-images/grokking-generalization.png'),
     link: 'https://arxiv.org/pdf/2201.02177'
   },
@@ -574,7 +576,6 @@ const lovedPapers = [
     authors: 'Picard, 2021',
     lane: 'seeds',
     why: 'On CIFAR-10 and ImageNet, changing the random seed can make the same architecture look unusually strong or weak.',
-    note: 'Why I keep it: one lucky run is not a result. It is a warning label.',
     image: publicUrl('assets/paper-images/random-seeds.png'),
     link: 'https://arxiv.org/pdf/2109.08203'
   },
@@ -583,7 +584,6 @@ const lovedPapers = [
     authors: 'Betley, Bao, Soto et al., 2025',
     lane: 'model behaviour',
     why: 'Finetuned LLMs can sometimes describe behaviours they learned, even when the training data did not spell those behaviours out.',
-    note: 'Why I keep it: self-reporting is useful only if you know where it breaks.',
     image: publicUrl('assets/paper-images/learned-behaviors.png'),
     link: 'https://arxiv.org/pdf/2501.11120'
   },
@@ -592,7 +592,6 @@ const lovedPapers = [
     authors: 'de Wynter, 2026',
     lane: 'anthropomorphism',
     why: 'The paper pushes back on broad claims about human-like LLM traits by applying similar criteria to Age of Empires II.',
-    note: 'Why I keep it: if the measurement also flatters a strategy game, the claim needs work.',
     image: publicUrl('assets/paper-images/age-of-empires.png'),
     link: 'https://arxiv.org/pdf/2605.31514'
   },
@@ -601,7 +600,6 @@ const lovedPapers = [
     authors: 'Maier, Aslak, Fiaschi, 2025',
     lane: 'synthetic users',
     why: 'Semantic similarity ratings map LLM text answers to Likert-style distributions and recover a lot of the human-survey signal.',
-    note: 'Why I keep it: synthetic consumer research is interesting only when the measurement is honest.',
     image: publicUrl('assets/paper-images/purchase-intent.png'),
     link: 'https://arxiv.org/pdf/2510.08338'
   }
@@ -905,6 +903,7 @@ function App() {
     if (path === '/portfolio') return <Portfolio />;
     if (path === '/papers') return <PapersPage navigate={navigate} />;
     if (path === '/blogs') return <BlogsPage navigate={navigate} />;
+    if (path === '/contributions' || path.startsWith('/contributions/')) return <Contributions path={path} navigate={navigate} />;
     if (path === '/resume') return <ResumePage />;
     if (path === '/contribution-snake') return <About navigate={navigate} />;
     return <Home navigate={navigate} />;
@@ -967,7 +966,7 @@ function Nav({ path, navigate, menuOpen, navHidden, setMenuOpen, onPaletteOpen }
       </button>
       <nav className="nav-pill" aria-label="Main navigation">
         {navItems.map((item) => (
-          <button key={item.path} className={path === item.path ? 'nav-link active' : 'nav-link'} onClick={() => closeNavigate(item.path)}>
+          <button key={item.path} className={path === item.path || (item.path !== '/' && path.startsWith(`${item.path}/`)) ? 'nav-link active' : 'nav-link'} onClick={() => closeNavigate(item.path)}>
             {item.label}
           </button>
         ))}
@@ -1409,54 +1408,22 @@ function Portfolio() {
     const target = sessionStorage.getItem('portfolio-selected');
     return allProjects.find((project) => project.key === target) || workProjects[0];
   };
-  const [branch, setBranch] = useState(() => initialProject().branch || 'all');
+  const [branch, setBranch] = useState('all');
   const [selected, setSelected] = useState(initialProject);
   const [highlightTargeted, setHighlightTargeted] = useState(() => sessionStorage.getItem('portfolio-focus') === 'highlights');
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
-  const caseRef = useRef(null);
-  const projects = useMemo(() => {
-    if (branch === 'all') return allProjects;
-    return allProjects.filter((project) => project.branch === branch);
-  }, [branch]);
+  const projects = branch === 'all' ? allProjects : allProjects.filter((project) => project.branch === branch);
   const selectedCase = selected ? projectCasebook[selected.key] : null;
   const galleryItems = selectedCase?.gallery || [];
   const activeGalleryIndex = galleryItems.length ? Math.min(galleryIndex, galleryItems.length - 1) : 0;
   const activeGalleryItem = galleryItems[activeGalleryIndex];
-  const branchCounts = {
-    all: allProjects.length,
-    personal: personalProjects.length,
-    work: workProjects.length
-  };
-  const branchLabels = {
-    all: { label: 'all', detail: `${branchCounts.all} items` },
-    work: { label: 'work', detail: 'companies' },
-    personal: { label: 'after work', detail: 'own builds' }
-  };
-  const branchGroups = [
-    { key: 'work', eyebrow: 'work', title: 'Company work', items: workProjects },
-    { key: 'personal', eyebrow: 'after work', title: 'My own builds', items: personalProjects }
-  ];
+  const branchLabels = { all: 'All', work: 'Work', personal: 'Own builds' };
 
   useEffect(() => {
-    const target = sessionStorage.getItem('portfolio-selected');
-    if (target) {
-      sessionStorage.removeItem('portfolio-selected');
-      const targetProject = allProjects.find((project) => project.key === target);
-      if (targetProject) {
-        setBranch(targetProject.branch);
-        setSelected(targetProject);
-        if (sessionStorage.getItem('portfolio-focus') === 'highlights') {
-          sessionStorage.removeItem('portfolio-focus');
-          setHighlightTargeted(true);
-        }
-        return;
-      }
-    }
-    if (!projects.some((project) => project.key === selected?.key)) {
-      setSelected(projects[0]);
-    }
-  }, [branch, projects, selected?.key]);
+    sessionStorage.removeItem('portfolio-selected');
+    sessionStorage.removeItem('portfolio-focus');
+  }, []);
 
   useEffect(() => {
     if (!highlightTargeted) return undefined;
@@ -1469,25 +1436,11 @@ function Portfolio() {
     setGalleryOpen(false);
   }, [selected?.key]);
 
-  const scrollCaseOnMobile = () => {
-    if (typeof window === 'undefined') return;
-    if (!window.matchMedia('(max-width: 760px)').matches) return;
-    window.setTimeout(() => {
-      const target = caseRef.current;
-      if (!target) return;
-      const top = target.getBoundingClientRect().top + window.scrollY - 18;
-      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-    }, 120);
-  };
-
   const handleBranchChange = (nextBranch) => {
     const nextProjects = nextBranch === 'all' ? allProjects : allProjects.filter((project) => project.branch === nextBranch);
     setBranch(nextBranch);
     if (nextProjects.length && !nextProjects.some((project) => project.key === selected?.key)) {
       setSelected(nextProjects[0]);
-    }
-    if (nextBranch === 'work' || nextBranch === 'personal') {
-      scrollCaseOnMobile();
     }
   };
 
@@ -1496,161 +1449,72 @@ function Portfolio() {
     setGalleryIndex((index) => (index + direction + galleryItems.length) % galleryItems.length);
   };
 
-  const pickProject = (project) => {
-    setHighlightTargeted(false);
-    setSelected(project);
-    scrollCaseOnMobile();
-  };
-
   return (
-    <section className="portfolio-v24 section-pad" data-chapter="Work map" data-chapter-id="portfolio-hero">
-      <div className="portfolio-v24-shell" data-reveal>
-        <header className="portfolio-v24-intro">
-          <div className="portfolio-v24-profile-banner">
-            <ReactBitsProfileCard onHome={() => navigate('/')} />
-          </div>
-          <p className="profile-kicker">work</p>
-          <h1>Stuff I've done and like to show off</h1>
-          <p>
-            DPD now. Daraz, Dastgyr, Udacity before. Sort Moments, WeaveSkip, NeighbourFit when the day job leaves enough brain.
-          </p>
-          <div className="portfolio-v24-filters" role="group" aria-label="Project filters">
-            {Object.entries(branchLabels).map(([key, item]) => (
-              <button key={key} className={branch === key ? 'active' : ''} onClick={() => handleBranchChange(key)}>
-                <strong>{item.label}</strong>
-                <span>{item.detail}</span>
-              </button>
-            ))}
-          </div>
+    <section className="portfolio-gh section-pad" data-chapter="Portfolio" data-chapter-id="portfolio-hero">
+      <div className="portfolio-gh-shell" data-reveal>
+        <header className="portfolio-gh-readme">
+          <code><GithubLogo size={16} aria-hidden="true" /> DarthAmk97 / portfolio</code>
+          <h1>Selected <em>work</em></h1>
+          <p>ML systems from DPD, Daraz, Dastgyr, and Udacity. Smaller tools when the problem keeps annoying me.</p>
         </header>
 
-        <main className="portfolio-v24-workbench">
-          <section className="portfolio-v24-map" aria-label="Project branches">
-            <div className="portfolio-v24-root">
-              <img src={brandIcons.avatar} alt="" aria-hidden="true" />
-              <div><code>root</code><strong>Abdullah Khawaja</strong></div>
-            </div>
-            {branchGroups.map((group) => {
-              const visible = branch === 'all' || branch === group.key;
-              return (
-                <div key={group.key} className={`portfolio-v24-lane ${visible ? '' : 'muted'}`}>
-                  <div className="portfolio-v24-lane-head">
-                    <code>{group.eyebrow}</code>
-                    <strong>{group.title}</strong>
-                  </div>
-                  <div className="portfolio-v24-nodes">
-                    {group.items.map((project) => (
-                      <button
-                        key={project.key}
-                        className={`${selected?.key === project.key ? 'active' : ''}`}
-                        onClick={() => { setBranch(branch === 'all' ? branch : group.key); pickProject(project); }}
-                      >
-                        <span>{project.iconPath ? <img src={project.iconPath} alt="" aria-hidden="true" /> : project.icon}</span>
-                        <strong>{project.name}</strong>
-                        <small>{project.tag}</small>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </section>
+        <nav className="portfolio-gh-filters" aria-label="Project filters">
+          {Object.entries(branchLabels).map(([key, label]) => (
+            <button key={key} className={branch === key ? 'active' : ''} onClick={() => handleBranchChange(key)}>
+              {label}<span>{key === 'all' ? allProjects.length : key === 'work' ? workProjects.length : personalProjects.length}</span>
+            </button>
+          ))}
+        </nav>
 
-          {selected && (
-            <article ref={caseRef} className={`portfolio-v24-case${selectedCase?.gallery ? ' has-gallery' : ''}`} aria-label={`${selected.name} details`} tabIndex={-1}>
-              <div className="portfolio-v24-case-head">
-                <span className="portfolio-v24-case-icon">{selected.iconPath ? <img src={selected.iconPath} alt="" aria-hidden="true" /> : selected.icon}</span>
-                <div>
-                  <code>{selected.domain || selected.company || (selected.branch === 'work' ? 'company work' : 'after-work project')}</code>
-                  <h2>{selected.name}</h2>
-                  <span className="portfolio-v35-case-tag">{selected.tag}</span>
-                </div>
-                <div className="portfolio-v24-actions">
-                  {selected.link && <a href={selected.link} target="_blank" rel="noreferrer">open <ArrowUpRight size={14} /></a>}
-                  {selected.source && <a href={selected.source} target="_blank" rel="noreferrer">source <GithubLogo size={14} /></a>}
-                </div>
+        <main className="portfolio-gh-list" aria-label="Projects">
+          <header><h2>Projects</h2><span>{projects.length} shown</span></header>
+          {projects.map((project, index) => {
+            const projectCase = projectCasebook[project.key];
+            const open = selected?.key === project.key;
+            return <article className={`portfolio-gh-repo is-${project.branch}${open ? ' is-open' : ''}`} key={project.key}>
+              <button className="portfolio-gh-summary" type="button" aria-expanded={open} aria-controls={`project-${project.key}`} onClick={() => { setSelected(project); setHighlightTargeted(false); }}>
+                <span className="portfolio-gh-index">{String(index + 1).padStart(2, '0')}</span>
+                <span className="portfolio-gh-icon">{project.iconPath ? <img src={project.iconPath} alt="" aria-hidden="true" /> : project.icon}</span>
+                <span className="portfolio-gh-name"><strong>{project.name}</strong><small>{project.domain}</small></span>
+                <span className="portfolio-gh-kind">{project.branch === 'work' ? 'work' : 'own build'}</span>
+                <span className="portfolio-gh-result"><strong>{project.tag}</strong><small>{open ? 'case open' : 'open case'}</small></span>
+              </button>
+
+              <div className="portfolio-gh-meta">
+                <span>{project.tech.slice(0, 4).join(' · ')}</span>
+                <span className="portfolio-gh-links">
+                  {project.link && <a href={project.link} target="_blank" rel="noreferrer">Visit <ArrowUpRight size={14} /></a>}
+                  {project.source && <a href={project.source} target="_blank" rel="noreferrer">Source <GithubLogo size={14} /></a>}
+                </span>
               </div>
 
-              {selectedCase?.modules ? (
-                <div className={highlightTargeted ? 'portfolio-v41-workstreams is-targeted' : 'portfolio-v41-workstreams'} id="portfolio-highlights" aria-label={`${selected.name} workstreams`}>
-                  {selectedCase.modules.map((module) => (
-                    <section key={module.lane}>
-                      <code>{module.lane}</code>
-                      <h3>{module.title}</h3>
-                      <p>{module.summary}</p>
-                      <ul>
-                        {module.points.map((point) => <li key={point}>{point}</li>)}
-                      </ul>
-                    </section>
-                  ))}
+              {open && <div className={`portfolio-gh-details${highlightTargeted ? ' is-targeted' : ''}`} id={`project-${project.key}`}>
+                <div className="portfolio-gh-detail-grid">
+                  <section className="is-problem"><h3>Problem</h3><p>{projectCase?.pain || project.solves}</p></section>
+                  <section className="is-build"><h3>Build</h3><p>{projectCase?.build || project.technical}</p></section>
+                  {projectCase?.result && <section className="is-result"><h3>Result</h3><p>{projectCase.result}</p></section>}
+                  {projectCase?.limit && <section className="is-tradeoff"><h3>Trade-off</h3><p>{projectCase.limit}</p></section>}
                 </div>
-              ) : (
-                <>
-                  <div className="portfolio-v31-detail-grid">
-                    <section>
-                      <code>problem</code>
-                      <p>{selected.solves}</p>
-                    </section>
-                    <section>
-                      <code>build</code>
-                      <p>{selected.technical}</p>
-                    </section>
-                  </div>
 
-                  {selectedCase && (
-                    <div className={highlightTargeted ? 'portfolio-v31-receipt-strip is-targeted' : 'portfolio-v31-receipt-strip'} id="portfolio-highlights">
-                      <div>
-                        <code>result</code>
-                        <p>{selectedCase.result}</p>
-                      </div>
-                      <div>
-                        <code>limit</code>
-                        <p>{selectedCase.limit}</p>
-                      </div>
-                    </div>
-                  )}
+                {projectCase?.modules && <div className="portfolio-gh-modules" aria-label={`${project.name} workstreams`}>
+                  {projectCase.modules.map((module) => <section key={module.lane}>
+                    <code>{module.lane}</code><h3>{module.title}</h3><p>{module.summary}</p>
+                    <ul>{module.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                  </section>)}
+                </div>}
 
-                  {selectedCase?.highlights && (
-                    <div className={highlightTargeted ? 'portfolio-v35-highlights is-targeted' : 'portfolio-v35-highlights'} aria-label={`${selected.name} highlights`}>
-                      {selectedCase.highlights.slice(0, 6).map(([label, value]) => (
-                        <div key={label}>
-                          <span>{label}</span>
-                          <strong>{value}</strong>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                {projectCase?.highlights && <dl className="portfolio-gh-highlights" aria-label={`${project.name} highlights`}>
+                  {projectCase.highlights.slice(0, 6).map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+                </dl>}
 
-                  {galleryItems.length > 0 && (
-                    <div className="portfolio-v55-gallery portfolio-v64-evidence" aria-label={`${selected.name} gallery`}>
-                      {galleryItems.map((item, index) => (
-                        <button
-                          key={item.src}
-                          type="button"
-                          className={activeGalleryIndex === index ? 'active' : ''}
-                          onMouseEnter={() => setGalleryIndex(index)}
-                          onFocus={() => setGalleryIndex(index)}
-                          onClick={() => { setGalleryIndex(index); setGalleryOpen(true); }}
-                        >
-                          <span className="portfolio-v64-shot">
-                            <img src={item.src} alt={item.alt} />
-                          </span>
-                          <span className="portfolio-v64-meta">
-                            <strong>{index === 0 ? 'student reviews' : 'mentor dashboard'}</strong>
-                            <small>open the screenshot</small>
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </>
-              )}
-
-              <div className="portfolio-v24-tech" aria-label={`${selected.name} tech stack`}>
-                {selected.tech.map((item) => <TechChip key={item} name={item} />)}
-              </div>
-            </article>
-          )}
+                {galleryItems.length > 0 && <div className="portfolio-gh-gallery" aria-label={`${project.name} gallery`}>
+                  {galleryItems.map((item, index) => <button key={item.src} type="button" onClick={() => { setGalleryIndex(index); setGalleryOpen(true); }}>
+                    <img src={item.src} alt={item.alt} /><span>Open image {index + 1}</span>
+                  </button>)}
+                </div>}
+              </div>}
+            </article>;
+          })}
         </main>
       </div>
 
@@ -1762,7 +1626,6 @@ function PapersPage({ navigate }) {
                 <div className="papers-v72-top"><span>{paper.authors}</span><strong>open PDF <ArrowUpRight size={14} /></strong></div>
                 <h2>{paper.title}</h2>
                 <p>{paper.why}</p>
-                <small>{paper.note}</small>
               </div>
             </a>
           ))}
