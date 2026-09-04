@@ -80,3 +80,9 @@
 - Fixed the mobile repository path/avatar overlap and filter focus clipping.
 - Verified desktop, 390×844 mobile, filters, expanded cases, and a clean browser console. `npm run build` passes.
 - Before/after screenshots: `.codex-temp/ui-20260904-portfolio-type/`. Nothing deployed.
+
+## 2026-09-04 — Production deployment
+
+- User approved the accumulated Contributions, TraceInverter, ICML certificate, Portfolio, and Papers changes.
+- Commit `52ab5ec` was pushed to both `codex/contributions-redesign` and `main`.
+- GitHub Pages workflow `33925150618` completed successfully; the live bundle contains the revised Portfolio and Contributions pages.
